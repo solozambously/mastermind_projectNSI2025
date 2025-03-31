@@ -14,6 +14,17 @@ def generate_random_color_sequence():
     random_color_sequence = [random.choice(colors) for _ in range(4)]
     return random_color_sequence
 
+def correct_colors_in_correct_position(random_color_sequence, guess):
+    """
+    Count the number of correct colors in the correct position.
+    """
+    counter_correct_position = 0
+    for i in range(4):
+        if guess[i] == random_color_sequence[i]:
+            counter_correct_position += 1
+        
+    return counter_correct_position
+
 def correct_colors_wrong_position(random_color_sequence, guess):
     """
     Count the number of correct colors in the guess.
@@ -24,24 +35,24 @@ def correct_colors_wrong_position(random_color_sequence, guess):
             if guess[j] == random_color_sequence[i]:
                 counter_wrong_position += 1
     
+    return counter_wrong_position
+
+def define_numbers_pions(counter_wrong_position, counter_correct_position):
+    """
+    Define the number of pions.
+    """
+    if counter_wrong_position != 0:
+        counter_wrong_position = counter_wrong_position - counter_correct_position 
+    
     pion_blanc = ["aucun pion blanc", "un pion blanc", "deux pions blancs", "trois pions blancs", "quatre pions blancs"][counter_wrong_position]
-
-    return pion_blanc
-
-def correct_colors_in_correct_position(random_color_sequence, guess):
-    """
-    Count the number of correct colors in the correct position.
-    """
-    counter_correct_position = 0
-    for i in range(4):
-        if guess[i] == random_color_sequence[i]:
-            counter_correct_position += 1
-    
     pion_noir = ["aucun pion noir", "un pion noir", "deux pions noirs", "trois pions noirs", "quatre pions noirs"][counter_correct_position]
-    
-    return pion_noir
 
+    return pion_noir, pion_blanc
+    
+    
 random_color_sequence = generate_random_color_sequence()
-print("Votre tentative :", random_color_sequence)
-print('(/!\ bug pout l\'instant):', correct_colors_wrong_position(random_color_sequence, ["R", "G", "B", "Y"]))
-print(correct_colors_in_correct_position(random_color_sequence, ["R", "G", "B", "Y"]))
+correct_colors_in_correct_position = correct_colors_in_correct_position(random_color_sequence, ["R", "G", "B", "Y"])
+correct_colors_wrong_position = correct_colors_wrong_position(random_color_sequence, ["R", "G", "B", "Y"])
+print("La combinaison secrète est :", random_color_sequence)
+print("Votre tentative :            ['R', 'G', 'B', 'Y']")
+print(define_numbers_pions(correct_colors_wrong_position, correct_colors_in_correct_position))
