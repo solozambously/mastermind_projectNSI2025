@@ -56,11 +56,3 @@ def define_numbers_pions(counter_wrong_position, counter_correct_position):
     pion_noir = ["aucun pion noir", "un pion noir", "deux pions noirs", "trois pions noirs", "quatre pions noirs"][counter_correct_position]
 
     return pion_noir, pion_blanc
-    
-    
-random_color_sequence = generate_random_color_sequence()
-correct_colors_in_correct_position = correct_colors_in_correct_position(random_color_sequence, ["R", "G", "B", "Y"])
-correct_colors_wrong_position = correct_colors_wrong_position(random_color_sequence, ["R", "G", "B", "Y"])
-print("La combinaison secrète est :", random_color_sequence)
-print("Votre tentative :            ['R', 'G', 'B', 'Y']")
-print(define_numbers_pions(correct_colors_wrong_position, correct_colors_in_correct_position))
