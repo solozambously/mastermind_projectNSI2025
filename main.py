@@ -1,58 +1,23 @@
-import random
+from functions import *
 
-def generate_random_color_sequence():
-    """
-    Generate a random sequence of colors.
-    Red : R
-    Green : G
-    Blue : B
-    Yellow : Y
-    Purple : P
-    Orange : O
-    """
-    colors = ["R", "G", "B", "Y", "P", "O"]
-    random_color_sequence = [random.choice(colors) for _ in range(4)]
-    return random_color_sequence
-
-def correct_colors_in_correct_position(random_color_sequence, guess):
-    """
-    Count the number of correct colors in the correct position.
-    """
-    counter_correct_position = 0
-    for i in range(4):
-        if guess[i] == random_color_sequence[i]:
-            counter_correct_position += 1
-        
-    return counter_correct_position
-
-def correct_colors_wrong_position(random_color_sequence, guess):
-    """
-    Count the number of correct colors in the guess.
-    """
-    counter_wrong_position = 0
-    for i in range(4):
-        for j in range(4):
-            if guess[j] == random_color_sequence[i]:
-                counter_wrong_position += 1
-    
-    return counter_wrong_position
-
-def define_numbers_pions(counter_wrong_position, counter_correct_position):
-    """
-    Define the number of pions.
-    """
-    if counter_wrong_position != 0:
-        counter_wrong_position = counter_wrong_position - counter_correct_position 
-    
-    pion_blanc = ["aucun pion blanc", "un pion blanc", "deux pions blancs", "trois pions blancs", "quatre pions blancs"][counter_wrong_position]
-    pion_noir = ["aucun pion noir", "un pion noir", "deux pions noirs", "trois pions noirs", "quatre pions noirs"][counter_correct_position]
-
-    return pion_noir, pion_blanc
-    
-    
 random_color_sequence = generate_random_color_sequence()
-correct_colors_in_correct_position = correct_colors_in_correct_position(random_color_sequence, ["R", "G", "B", "Y"])
-correct_colors_wrong_position = correct_colors_wrong_position(random_color_sequence, ["R", "G", "B", "Y"])
-print("La combinaison secrète est :", random_color_sequence)
-print("Votre tentative :            ['R', 'G', 'B', 'Y']")
-print(define_numbers_pions(correct_colors_wrong_position, correct_colors_in_correct_position))
+
+couleurs = ["R", "G", "B", "Y", "P", "O"]
+
+
+tentatives = 0
+max_tentatives = 12
+
+print("Bienvenue dans le jeu Mastermind !")
+while tentatives < max_tentatives: 
+    combinaison = input("Entrez une combinaison de 4 couleurs parmi R, G, B, Y, P, O : ").upper()
+    tentatives += 1
+    if len(combinaison) == 4:
+        print('Votre essai : ', combinaison)
+        count_correct_position = correct_colors_in_correct_position(random_color_sequence, combinaison)
+        counter_wrong_position = correct_colors_wrong_position(random_color_sequence, combinaison)
+        print(define_numbers_pions(counter_wrong_position, count_correct_position))
+    else:
+        print("Combinaison invalide. Essayez à nouveau.")
+    print("tentaive restantes : ", max_tentatives - tentatives)
+print("Vous avez perdu ! La combinaison était : ", random_color_sequence)
