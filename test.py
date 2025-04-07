@@ -1,4 +1,4 @@
-from main import *
+from functions import *
 
 
 random_color_sequence = generate_random_color_sequence()
