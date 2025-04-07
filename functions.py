@@ -27,15 +27,23 @@ def correct_colors_in_correct_position(random_color_sequence, guess):
 
 def correct_colors_wrong_position(random_color_sequence, guess):
     """
-    Count the number of correct colors in the guess.
+    Count the number of correct colors but in the wrong position.
     """
+    # On fait des copies pour ne pas modifier les originaux
+    sequence_copy = random_color_sequence[:]
+    guess_copy = guess[:]
+    
+
+    # chercher les bonnes couleurs mal placées
     counter_wrong_position = 0
     for i in range(4):
-        for j in range(4):
-            if guess[j] == random_color_sequence[i]:
-                counter_wrong_position += 1
-    
+        if guess_copy[i] is not None and guess_copy[i] in sequence_copy:
+            counter_wrong_position += 1
+            # Supprimer cette couleur pour ne pas la recompter
+            sequence_copy[sequence_copy.index(guess_copy[i])] = None
+
     return counter_wrong_position
+
 
 def define_numbers_pions(counter_wrong_position, counter_correct_position):
     """
