@@ -49,10 +49,15 @@ def define_numbers_pions(counter_wrong_position, counter_correct_position):
     """
     Define the number of pions.
     """
+    finish_game = False
+    
     if counter_wrong_position != 0:
         counter_wrong_position = counter_wrong_position - counter_correct_position 
     
     pion_blanc = ["aucun pion blanc", "un pion blanc", "deux pions blancs", "trois pions blancs", "quatre pions blancs"][counter_wrong_position]
     pion_noir = ["aucun pion noir", "un pion noir", "deux pions noirs", "trois pions noirs", "quatre pions noirs"][counter_correct_position]
 
-    return pion_noir, pion_blanc
+    if counter_correct_position == 4:
+        finish_game = True
+
+    return pion_noir, pion_blanc, finish_game
