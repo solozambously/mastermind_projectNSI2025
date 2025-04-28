@@ -2,13 +2,12 @@ import random
 
 def generate_random_color_sequence():
     """
-    Generate a random sequence of colors.
-    Red : R
-    Green : G
-    Blue : B
-    Yellow : Y
-    Purple : P
-    Orange : O
+    Génère une séquence aléatoire de 4 couleurs parmi les suivantes :
+    Rouge (R), Vert (G), Bleu (B), Jaune (Y), Violet (P), Orange (O).
+    Entrées:
+        Aucune.
+    Sorties:
+        list: Une liste de 4 caractères représentant les couleurs choisies aléatoirement.
     """
     colors = ["R", "G", "B", "Y", "P", "O"]
     random_color_sequence = []
@@ -20,8 +19,14 @@ def generate_random_color_sequence():
 
 def correct_colors_in_correct_position(random_color_sequence, guess):
     """
-    Count the number of correct colors in the correct position.
+    Compte le nombre de couleurs correctes à la position correcte.
+    Entrées :
+        random_color_sequence (list) : Une liste de 4 couleurs représentant la séquence aléatoire générée.
+        guess (list) : Une liste de 4 couleurs représentant la tentative de l'utilisateur.
+    Sorties :
+        int : Le nombre de couleurs correctes qui sont également à la position correcte.
     """
+    
     counter_correct_position = 0
     for i in range(4):
         if guess[i] == random_color_sequence[i]:
@@ -31,8 +36,14 @@ def correct_colors_in_correct_position(random_color_sequence, guess):
 
 def correct_colors_wrong_position(random_color_sequence, guess):
     """
-    Count the number of correct colors but in the wrong position.
+    Compte le nombre de couleurs correctes mais mal placées.
+    Entrées :
+        random_color_sequence (list) : Une liste de 4 couleurs représentant la séquence aléatoire générée.
+        guess (list) : Une liste de 4 couleurs représentant la tentative de l'utilisateur.
+    Sorties :
+        int : Le nombre de couleurs correctes mais mal placées.
     """
+
     # On fait des copies pour ne pas modifier les originaux
     sequence_copy = random_color_sequence[:]
     guess_copy = guess[:]
@@ -51,8 +62,15 @@ def correct_colors_wrong_position(random_color_sequence, guess):
 
 def define_numbers_pions(counter_wrong_position, counter_correct_position):
     """
-    Define the number of pions.
+    Définit le nombre de pions noirs et blancs en fonction des couleurs correctes.
+    Entrées :
+        counter_wrong_position (int) : Le nombre de couleurs correctes mais mal placées.
+        counter_correct_position (int) : Le nombre de couleurs correctes à la position correcte.
+    Sorties :
+        tuple : Une chaîne décrivant les pions noirs, une chaîne décrivant les pions blancs, 
+                et un booléen indiquant si le jeu est terminé.
     """
+    
     finish_game = False
     
     if counter_wrong_position != 0:
