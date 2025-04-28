@@ -11,7 +11,11 @@ def generate_random_color_sequence():
     Orange : O
     """
     colors = ["R", "G", "B", "Y", "P", "O"]
-    random_color_sequence = [random.choice(colors) for _ in range(4)]
+    random_color_sequence = []
+    for i in range(4):
+        numbers = random.randint(1, 6)
+        random_color_sequence.append(colors[numbers])
+
     return random_color_sequence
 
 def correct_colors_in_correct_position(random_color_sequence, guess):
